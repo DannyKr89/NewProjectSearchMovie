@@ -1,14 +1,20 @@
-package com.dk.newprojectsearchmovie;
+package com.dk.newprojectsearchmovie
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.dk.newprojectsearchmovie.databinding.ActivityMainBinding
 
-import android.os.Bundle;
+class MainActivity : AppCompatActivity() {
 
-public class MainActivity extends AppCompatActivity {
+    lateinit var binding: ActivityMainBinding
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btn.setOnClickListener {
+
+        }
     }
 }
