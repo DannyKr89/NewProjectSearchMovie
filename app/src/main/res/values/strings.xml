@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">New Project Search Movie</string>
-    <string name="button">кнопка</string>
+    <string name="app_name">Search Movie</string>
+    <string name="top_250">Топ 250 Фильмов</string>
+    <string name="poster">poster</string>
 </resources>
