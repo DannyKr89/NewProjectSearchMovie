@@ -1,5 +1,6 @@
-package com.dk.newprojectsearchmovie.viewmodel
+package com.dk.newprojectsearchmovie.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,16 +8,23 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
 import com.dk.newprojectsearchmovie.model.Movie
 
-class MovieListAdapter() :
+class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieClickListner?) :
     RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
-    private var movieList: List<Movie> = listOf<Movie>()
 
+    private var movieList = listOf<Movie>()
+
+    fun removeListener(){
+        listener = null
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setMovieList(list: List<Movie>){
         movieList = list
+        notifyDataSetChanged()
     }
 
 
-    class MovieListViewHolder(private val binding: ItemMovieListBinding) :
+    inner class MovieListViewHolder(private val binding: ItemMovieListBinding) :
         ViewHolder(binding.root) {
         fun bind(movie: Movie) {
             with(binding) {
@@ -24,6 +32,9 @@ class MovieListAdapter() :
                 yearMovie.text = movie.year.toString()
                 ratingMovie.text = movie.rating.toString()
                 movie.poster?.let { poster.setImageResource(it) }
+                movieCard.setOnClickListener {
+                    listener?.OnMovieClick(movie)
+                }
             }
         }
     }
@@ -38,7 +49,8 @@ class MovieListAdapter() :
         holder.bind(movieList[position])
     }
 
-    override fun getItemCount(): Int {
-        return movieList.size
-    }
+    override fun getItemCount(): Int = movieList.size
+
+
 }
+

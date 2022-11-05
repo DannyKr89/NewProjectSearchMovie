@@ -3,11 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainMuvieListFragment">
+    app:startDestination="@id/mainMovieListFragment">
 
     <fragment
-        android:id="@+id/mainMuvieListFragment"
+        android:id="@+id/mainMovieListFragment"
         android:name="com.dk.newprojectsearchmovie.view.MainMovieListFragment"
-        android:label="fragment_main_muvie_list"
-        tools:layout="@layout/fragment_main_movie_list" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_main_movie_list" >
+        <action
+            android:id="@+id/action_mainMuvieListFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.dk.newprojectsearchmovie.MovieDetailFragment"
+        android:label="{name}"
+        tools:layout="@layout/fragment_movie_detail" >
+        <action
+            android:id="@+id/action_movieDetailFragment_to_mainMuvieListFragment"
+            app:destination="@id/mainMovieListFragment"
+            app:popUpTo="@id/mainMovieListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>
