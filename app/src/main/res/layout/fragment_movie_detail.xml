@@ -4,24 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MovieDetailFragment">
+    tools:context=".view.MovieDetailFragment">
 
 
     <ImageView
         android:id="@+id/imageMovie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/poster" />
 
     <TextView
         android:id="@+id/movieTitle"
         android:layout_width="wrap_content"
+        android:textStyle="bold"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/movieRealise"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/movieRaiting"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

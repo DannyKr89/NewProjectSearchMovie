@@ -5,11 +5,10 @@ import com.dk.newprojectsearchmovie.model.getMoviePopularListFromLocalStorage
 import com.dk.newprojectsearchmovie.model.getMovieTop250ListFromLocalStorage
 
 class LocalRepositoryImpl: Repository {
-    override fun getMovieTop250List(): List<Movie> {
-        return getMovieTop250ListFromLocalStorage()
-    }
-
-    override fun getMoviePopularList(): List<Movie> {
-        return getMoviePopularListFromLocalStorage()
+    override fun getMovieList(movieListType: MovieListType): List<Movie> {
+        return when (movieListType) {
+            MovieListType.TOP250 -> getMovieTop250ListFromLocalStorage()
+            MovieListType.POPULAR -> getMoviePopularListFromLocalStorage()
+        }
     }
 }

@@ -1,14 +1,16 @@
-package com.dk.newprojectsearchmovie.view
+package com.dk.newprojectsearchmovie.view.movielist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
+import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
 import com.dk.newprojectsearchmovie.model.Movie
 
-class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieClickListner?) :
+class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieClickListener?) :
     RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
     private var movieList = listOf<Movie>()
@@ -29,11 +31,13 @@ class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieCli
         fun bind(movie: Movie) {
             with(binding) {
                 titleMovie.text = movie.title
-                yearMovie.text = movie.year.toString()
-                ratingMovie.text = movie.rating.toString()
-                movie.poster?.let { poster.setImageResource(it) }
+                yearMovie.text = movie.year
+                ratingMovie.text = movie.rating
+
+                Glide.with(binding.root.context).load(movie.poster).error(movie.posterLocal)
+                    .placeholder(R.drawable.poster).into(poster)
                 movieCard.setOnClickListener {
-                    listener?.OnMovieClick(movie)
+                    listener?.onMovieClick(movie)
                 }
             }
         }

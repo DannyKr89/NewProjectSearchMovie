@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainMovieListFragment"
-        android:name="com.dk.newprojectsearchmovie.view.MainMovieListFragment"
+        android:name="com.dk.newprojectsearchmovie.view.movielist.MainMovieListFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_main_movie_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.dk.newprojectsearchmovie.MovieDetailFragment"
+        android:name="com.dk.newprojectsearchmovie.view.MovieDetailFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_movie_detail" >
         <action
