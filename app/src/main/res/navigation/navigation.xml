@@ -13,19 +13,17 @@
         <action
             android:id="@+id/action_mainMuvieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mainMovieListFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.dk.newprojectsearchmovie.view.MovieDetailFragment"
         android:label="{name}"
-        tools:layout="@layout/fragment_movie_detail" >
-        <action
-            android:id="@+id/action_movieDetailFragment_to_mainMuvieListFragment"
-            app:destination="@id/mainMovieListFragment"
-            app:popUpTo="@id/mainMovieListFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/fragment_movie_detail" />
 </navigation>

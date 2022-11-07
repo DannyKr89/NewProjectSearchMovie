@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
 import com.dk.newprojectsearchmovie.model.Movie
 
@@ -28,17 +27,17 @@ class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieCli
 
     inner class MovieListViewHolder(private val binding: ItemMovieListBinding) :
         ViewHolder(binding.root) {
+
         fun bind(movie: Movie) {
             with(binding) {
                 titleMovie.text = movie.title
                 yearMovie.text = movie.year
                 ratingMovie.text = movie.rating
-
-                Glide.with(binding.root.context).load(movie.poster).error(movie.posterLocal)
-                    .placeholder(R.drawable.poster).into(poster)
                 movieCard.setOnClickListener {
                     listener?.onMovieClick(movie)
                 }
+                Glide.with(binding.root.context).load(movie.poster).error(movie.posterLocal)
+                    .override(100, 150).into(poster)
             }
         }
     }

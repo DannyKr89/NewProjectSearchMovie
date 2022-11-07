@@ -4,17 +4,11 @@ package com.dk.newprojectsearchmovie.model.imdb
 import com.google.gson.annotations.SerializedName
 
 data class ImdbMovieList(
-    @SerializedName("errorMessage")
-    val errorMessage: String?,
     @SerializedName("items")
-    val movies: List<ImdbMovie>?
+    val movies: List<ImdbMovieListItem>?
 )
 
-data class ImdbMovie(
-    @SerializedName("crew")
-    val crew: String?,
-    @SerializedName("fullTitle")
-    val fullTitle: String?,
+data class ImdbMovieListItem(
     @SerializedName("id")
     val id: String?,
     @SerializedName("imDbRating")
