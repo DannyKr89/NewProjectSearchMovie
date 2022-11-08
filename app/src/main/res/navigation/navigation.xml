@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
-        android:name="com.dk.newprojectsearchmovie.view.MovieDetailFragment"
+        android:name="com.dk.newprojectsearchmovie.view.details.MovieDetailFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_movie_detail" />
 </navigation>

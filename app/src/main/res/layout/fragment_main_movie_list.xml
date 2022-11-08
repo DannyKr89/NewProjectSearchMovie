@@ -57,7 +57,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:nestedScrollingEnabled="true"
                 android:orientation="horizontal"
                 android:scrollbarStyle="outsideInset"
                 android:background="@color/black"
@@ -85,7 +84,7 @@
                 android:id="@+id/rvMoviesPopular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="true"
+                android:padding="8dp"
                 android:orientation="horizontal"
                 android:scrollbarStyle="outsideInset"
                 android:background="@color/black"
@@ -93,12 +92,12 @@
                 android:scrollbarTrackHorizontal="@color/gray"
                 android:scrollbars="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:padding="8dp"
                 tools:listitem="@layout/item_movie_list" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="4dp"

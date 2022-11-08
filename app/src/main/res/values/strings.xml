@@ -4,4 +4,9 @@
     <string name="poster">poster</string>
     <string name="popular">Популярные</string>
     <string name="internet">internet</string>
+    <string name="votes">(%s) голосов</string>
+    <string name="writers">Сценаристы:</string>
+    <string name="directors">Режиссеры:</string>
+    <string name="actors">Актеры:</string>
+    <string name="similars">Похожие фильмы:</string>
 </resources>

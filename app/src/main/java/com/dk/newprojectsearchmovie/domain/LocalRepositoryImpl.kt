@@ -15,13 +15,13 @@ class LocalRepositoryImpl: Repository {
     }
 
     override fun getMovieDetail(movie: Movie): ImdbMovieDetail {
-//        return ImdbMovieDetail(
-//            title = movie.title,
-//            year = movie.year,
-//            imDbRating = movie.rating,
-//            image = movie.poster,
-//            posterLocal = movie.posterLocal
-//        )
-        return getTestMovie()
+        return ImdbMovieDetail(
+            title = movie.title,
+            year = movie.year,
+            imDbRating = movie.rating,
+            image = movie.poster,
+            posterLocal = movie.posterLocal
+        )
+//        return getTestMovie() //TODO если API_KEY и API_KEY2 не работают
     }
 }

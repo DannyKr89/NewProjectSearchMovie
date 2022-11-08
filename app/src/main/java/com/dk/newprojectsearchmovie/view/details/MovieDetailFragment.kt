@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.view
+package com.dk.newprojectsearchmovie.view.details
 
 import android.graphics.Color
 import android.os.Bundle
@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMovieDetailBinding
 import com.dk.newprojectsearchmovie.model.Movie
 import com.dk.newprojectsearchmovie.model.imdb.imdbMovie.ImdbMovieDetail
 import com.dk.newprojectsearchmovie.viewmodel.MovieListViewModel
 import com.dk.newprojectsearchmovie.viewmodel.StateLoadMovie
 import jp.wasabeef.glide.transformations.BlurTransformation
+import java.text.NumberFormat
 
 class MovieDetailFragment : Fragment() {
 
@@ -42,13 +44,15 @@ class MovieDetailFragment : Fragment() {
         movieViewModel.getMovieDetailState().observe(viewLifecycleOwner) {
             when (it) {
                 is StateLoadMovie.ErrorLoad -> {
+                    hideProgressBar()
+                    renderDetail(it.imdbMovieDetail)
                     Toast.makeText(requireContext(),"error",Toast.LENGTH_SHORT).show()
                 }
                 is StateLoadMovie.Loading -> {
-                    Toast.makeText(requireContext(),"loading",Toast.LENGTH_SHORT).show()
+                    showProgressBar()
                 }
                 is StateLoadMovie.SuccessLoad -> {
-                    Toast.makeText(requireContext(),"success",Toast.LENGTH_SHORT).show()
+                    hideProgressBar()
                     renderDetail(it.imdbMovieDetail)
                 }
             }
@@ -56,6 +60,20 @@ class MovieDetailFragment : Fragment() {
         }
 
 
+    }
+
+    private fun hideProgressBar() {
+        with(binding) {
+            progressBarDetail.visibility = View.GONE
+            nestedSVDetail.visibility = View.VISIBLE
+        }
+    }
+
+    private fun showProgressBar() {
+        with(binding) {
+            progressBarDetail.visibility = View.VISIBLE
+            nestedSVDetail.visibility = View.GONE
+        }
     }
 
     private fun renderDetail(movieDetail: ImdbMovieDetail) {
@@ -75,18 +93,23 @@ class MovieDetailFragment : Fragment() {
             movieRealise.text = movieDetail.year
 
             movieRating.apply {
-                text = movieDetail.imDbRating
+                text = movieDetail.imDbRating?.toDouble().toString()
                 movieDetail.imDbRating?.let {
                     when (it.toDouble()) {
-                        in 0.0..4.9 ->  setTextColor(Color.RED)
+                        in 0.0..4.9 -> setTextColor(Color.RED)
                         in 5.0..6.9 -> setTextColor(Color.YELLOW)
                         in 7.0..10.0 -> setTextColor(Color.GREEN)
                     }
                 }
             }
-
-            movieRatingVote.text = movieDetail.imDbRatingVotes
-
+            if (movieDetail.imDbRatingVotes.equals("")){
+                movieRatingVote.text = movieDetail.imDbRatingVotes
+            } else {
+                movieRatingVote.text = String.format(
+                    getString(R.string.votes),
+                    NumberFormat.getInstance().format(movieDetail.imDbRatingVotes.toLong())
+                )
+            }
             movieContentRating.text = movieDetail.contentRating
             movieCountries.text = movieDetail.countries
             movieGenres.text = movieDetail.genres
@@ -95,6 +118,9 @@ class MovieDetailFragment : Fragment() {
             movieLocalPlot.text = movieDetail.plotLocal
             movieStars.text = movieDetail.stars
             movieWriter.text = movieDetail.writers
+
+            rvActorsList.adapter = DetailAdapter(movieDetail.actorList)
+            rvSimilarsList.adapter = DetailAdapter(movieDetail.similars)
         }
     }
 

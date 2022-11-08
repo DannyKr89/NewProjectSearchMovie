@@ -1,6 +1,5 @@
 package com.dk.newprojectsearchmovie.view.movielist
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,20 +7,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
 import com.dk.newprojectsearchmovie.model.Movie
+import kotlinx.android.synthetic.main.item_movie_list.view.*
 
-class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieClickListener?) :
-    RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+class MovieListAdapter(
+    private val movieList: List<Movie>, var listener: MainMovieListFragment.SetOnMovieClickListener?
+) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
-    private var movieList = listOf<Movie>()
-
-    fun removeListener(){
+    fun removeListener() {
         listener = null
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setMovieList(list: List<Movie>){
-        movieList = list
-        notifyDataSetChanged()
     }
 
 
@@ -30,14 +23,16 @@ class MovieListAdapter(private var listener: MainMovieListFragment.SetOnMovieCli
 
         fun bind(movie: Movie) {
             with(binding) {
+
+                Glide.with(binding.root.poster).load(movie.poster).error(movie.posterLocal)
+                    .into(poster)
+
                 titleMovie.text = movie.title
                 yearMovie.text = movie.year
                 ratingMovie.text = movie.rating
                 movieCard.setOnClickListener {
                     listener?.onMovieClick(movie)
                 }
-                Glide.with(binding.root.context).load(movie.poster).error(movie.posterLocal)
-                    .override(100, 150).into(poster)
             }
         }
     }

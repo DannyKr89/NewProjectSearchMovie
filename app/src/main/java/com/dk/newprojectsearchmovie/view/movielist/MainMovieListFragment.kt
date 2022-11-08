@@ -16,8 +16,8 @@ import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
 import com.dk.newprojectsearchmovie.domain.MovieListType
 import com.dk.newprojectsearchmovie.model.Movie
-import com.dk.newprojectsearchmovie.view.MovieDetailFragment.Companion.MOVIE
-import com.dk.newprojectsearchmovie.view.MovieDetailFragment.Companion.NAME
+import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.MOVIE
+import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.NAME
 import com.dk.newprojectsearchmovie.viewmodel.MovieListViewModel
 import com.dk.newprojectsearchmovie.viewmodel.StateLoadMovieList
 
@@ -49,12 +49,11 @@ class MainMovieListFragment : Fragment() {
             }
         }
 
-        initListViewModel(MovieListType.TOP250, binding.rvMoviesTop250)
         initListViewModel(MovieListType.POPULAR, binding.rvMoviesPopular)
+        initListViewModel(MovieListType.TOP250, binding.rvMoviesTop250)
 
-        if (savedInstanceState == null){
-            initStorageViewModel()
-        }
+        initStorageViewModel()
+
 
     }
 
@@ -82,11 +81,9 @@ class MainMovieListFragment : Fragment() {
                 }
                 is StateLoadMovieList.Loading -> {
                     showProgressBar()
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
                 }
                 is StateLoadMovieList.SuccessLoad -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
                     renderMovieList(it.movieList, recyclerView)
                 }
             }
@@ -108,7 +105,7 @@ class MainMovieListFragment : Fragment() {
     }
 
     private fun renderMovieList(movieList: List<Movie>, recyclerView: RecyclerView) {
-        adapter = MovieListAdapter(object : SetOnMovieClickListener {
+        adapter = MovieListAdapter(movieList, object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,
                     Bundle().apply {
@@ -116,9 +113,7 @@ class MainMovieListFragment : Fragment() {
                         putString(NAME, movie.title)
                     })
             }
-        }).apply {
-            setMovieList(movieList)
-        }
+        })
         recyclerView.adapter = adapter
     }
 
