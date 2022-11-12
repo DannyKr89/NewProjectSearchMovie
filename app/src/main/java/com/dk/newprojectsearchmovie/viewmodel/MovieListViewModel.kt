@@ -79,13 +79,11 @@ class MovieListViewModel(
         }
         Thread {
             val imdbMovieDetail = repository.getMovieDetail(movie)
-            if (imdbMovieDetail.equals(ImdbMovieDetail())) {
+            if (imdbMovieDetail == ImdbMovieDetail()) {
                 getMovieDetail.postValue(StateLoadMovie.ErrorLoad(imdbMovieDetail))
             } else {
                 getMovieDetail.postValue(StateLoadMovie.SuccessLoad(imdbMovieDetail))
             }
         }.start()
     }
-
-
 }

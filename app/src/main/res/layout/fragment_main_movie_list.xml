@@ -50,6 +50,8 @@
                 android:padding="8dp"
                 android:text="@string/top_250"
                 android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:shadowRadius="10"
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -78,6 +80,8 @@
                 android:padding="8dp"
                 android:text="@string/popular"
                 android:textColor="@color/white"
+                android:shadowColor="@color/black"
+                android:shadowRadius="10"
                 android:textSize="24sp" />
 
             <androidx.recyclerview.widget.RecyclerView

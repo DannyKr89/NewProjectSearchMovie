@@ -22,7 +22,7 @@ class RequestApi {
                 MovieListType.POPULAR -> POPULAR
             }
             val list: MutableList<Movie> = mutableListOf()
-            val url = URL("https://imdb-api.com/ru/API/$movieList/$API_KEY2")
+            val url = URL("https://imdb-api.com/ru/API/$movieList/$API_KEY")
             val connection = url.openConnection() as HttpsURLConnection
             connection.readTimeout = 10000
             return try {
@@ -44,7 +44,7 @@ class RequestApi {
         }
 
         fun requestMovie(movie: Movie): ImdbMovieDetail {
-            val url = URL("https://imdb-api.com/ru/API/Title/$API_KEY2/${movie.id}")
+            val url = URL("https://imdb-api.com/ru/API/Title/$API_KEY/${movie.id}")
             val connection = url.openConnection() as HttpsURLConnection
             connection.readTimeout = 10000
             return try {
