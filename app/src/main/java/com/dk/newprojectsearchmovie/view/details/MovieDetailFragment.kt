@@ -107,7 +107,7 @@ class MovieDetailFragment : Fragment() {
                 }
             }
 
-            movieRatingVote.text = if(movieDetail.imDbRating != null)
+            movieRatingVote.text = if(movieDetail.imDbRating != null && movieDetail.imDbRating.equals(""))
                 String.format(
                     getString(R.string.votes),
                     NumberFormat.getInstance().format(movieDetail.imDbRatingVotes.toLong()))

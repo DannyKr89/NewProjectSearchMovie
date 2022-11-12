@@ -70,6 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textColor="@color/white"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="4"
                     android:textSize="30sp"
                     android:textStyle="bold" />
 
@@ -112,6 +114,8 @@
                         android:layout_gravity="top"
                         android:paddingHorizontal="4dp"
                         android:textColor="@color/white"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="4"
                         android:textStyle="bold" />
 
                     <TextView
@@ -121,6 +125,9 @@
                         android:layout_gravity="bottom"
                         android:paddingHorizontal="4dp"
                         android:textSize="8sp"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="4"
+                        android:textColor="@color/white"
                         android:textStyle="bold"
                         tools:ignore="SmallSp" />
 
@@ -138,6 +145,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:paddingHorizontal="4dp"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="4"
                         android:textSize="8sp"
                         android:textStyle="bold"
                         tools:ignore="SmallSp" />
@@ -147,6 +156,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="4dp"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="4"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
 
@@ -155,6 +166,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="4"
                         android:paddingHorizontal="4dp"
                         android:textSize="8sp"
                         android:textStyle="bold"
@@ -176,6 +189,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="4"
+                    android:textColor="@color/white"
                     android:padding="4dp"
                     android:textAlignment="center"
                     android:textStyle="bold" />
@@ -215,6 +231,9 @@
                     android:id="@+id/movieDirector"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="4"
+                    android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
@@ -233,6 +252,9 @@
                     android:id="@+id/movieWriter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="4"
+                    android:textColor="@color/white"
                     android:layout_gravity="center"
                     android:textStyle="bold" />
 
