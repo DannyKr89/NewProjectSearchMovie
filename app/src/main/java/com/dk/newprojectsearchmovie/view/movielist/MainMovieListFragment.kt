@@ -105,7 +105,7 @@ class MainMovieListFragment : Fragment() {
     }
 
     private fun renderMovieList(movieList: List<Movie>, recyclerView: RecyclerView) {
-        adapter = MovieListAdapter(movieList, object : SetOnMovieClickListener {
+        adapter = MovieListAdapter(object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,
                     Bundle().apply {
@@ -113,7 +113,9 @@ class MainMovieListFragment : Fragment() {
                         putString(NAME, movie.title)
                     })
             }
-        })
+        }).apply {
+            setMovieList(movieList)
+        }
         recyclerView.adapter = adapter
     }
 

@@ -93,7 +93,11 @@ class MovieDetailFragment : Fragment() {
             movieRealise.text = movieDetail.year
 
             movieRating.apply {
-                text = movieDetail.imDbRating?.toDouble().toString()
+                text = if (movieDetail.imDbRating != null) {
+                    movieDetail.imDbRating
+                } else {
+                    ""
+                }
                 movieDetail.imDbRating?.let {
                     when (it.toDouble()) {
                         in 0.0..4.9 -> setTextColor(Color.RED)
@@ -102,14 +106,14 @@ class MovieDetailFragment : Fragment() {
                     }
                 }
             }
-            if (movieDetail.imDbRatingVotes.equals("")){
-                movieRatingVote.text = movieDetail.imDbRatingVotes
-            } else {
-                movieRatingVote.text = String.format(
+
+            movieRatingVote.text = if(movieDetail.imDbRating != null)
+                String.format(
                     getString(R.string.votes),
-                    NumberFormat.getInstance().format(movieDetail.imDbRatingVotes.toLong())
-                )
-            }
+                    NumberFormat.getInstance().format(movieDetail.imDbRatingVotes.toLong()))
+             else String.format(
+                getString(R.string.votes), "0")
+
             movieContentRating.text = movieDetail.contentRating
             movieCountries.text = movieDetail.countries
             movieGenres.text = movieDetail.genres

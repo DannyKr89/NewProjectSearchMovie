@@ -1,5 +1,6 @@
 package com.dk.newprojectsearchmovie.view.movielist
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,11 +11,19 @@ import com.dk.newprojectsearchmovie.model.Movie
 import kotlinx.android.synthetic.main.item_movie_list.view.*
 
 class MovieListAdapter(
-    private val movieList: List<Movie>, var listener: MainMovieListFragment.SetOnMovieClickListener?
+    var listener: MainMovieListFragment.SetOnMovieClickListener?
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
+
+    private var movieList = listOf<Movie>()
 
     fun removeListener() {
         listener = null
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setMovieList(list: List<Movie>){
+        movieList = list
+        notifyDataSetChanged()
     }
 
 
