@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.model.imdb.imdbMovie
+package com.dk.newprojectsearchmovie.model.imdbMovie
 
 
 import com.google.gson.annotations.SerializedName
@@ -27,8 +27,7 @@ data class ImdbMovieDetail(
     @SerializedName("title") val title: String? = "",
     @SerializedName("type") val type: String = "",
     @SerializedName("writers") val writers: String = "",
-    @SerializedName("year") val year: String? = "",
-    val posterLocal: Int? = 0
+    @SerializedName("year") val year: String? = ""
 )
 
 fun getTestMovie(): ImdbMovieDetail {

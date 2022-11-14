@@ -12,8 +12,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMovieDetailBinding
-import com.dk.newprojectsearchmovie.model.Movie
-import com.dk.newprojectsearchmovie.model.imdb.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.model.imdb.Movie
+import com.dk.newprojectsearchmovie.model.imdbMovie.ImdbMovieDetail
 import com.dk.newprojectsearchmovie.viewmodel.MovieListViewModel
 import com.dk.newprojectsearchmovie.viewmodel.StateLoadMovie
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -80,12 +80,10 @@ class MovieDetailFragment : Fragment() {
 
         with(binding) {
             Glide.with(binding.root.context).load(movieDetail.image)
-                .error(movieDetail.posterLocal)
                 .into(imageMovie)
 
             Glide.with(binding.root.context)
                 .load(movieDetail.image)
-                .error(movieDetail.posterLocal)
                 .apply(bitmapTransform(BlurTransformation(25, 3)))
                 .into(background)
 

@@ -1,8 +1,6 @@
 package com.dk.newprojectsearchmovie.view.movielist
 
 import android.annotation.SuppressLint
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
 import com.dk.newprojectsearchmovie.domain.MovieListType
-import com.dk.newprojectsearchmovie.model.Movie
+import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
+import com.dk.newprojectsearchmovie.model.imdb.Movie
 import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.MOVIE
 import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.NAME
 import com.dk.newprojectsearchmovie.viewmodel.MovieListViewModel
@@ -43,33 +42,13 @@ class MainMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
-            fabToggle.setOnClickListener {
-                movieListViewModel.toggleStorage()
-            }
-        }
-
         initListViewModel(MovieListType.POPULAR, binding.rvMoviesPopular)
         initListViewModel(MovieListType.TOP250, binding.rvMoviesTop250)
 
-        initStorageViewModel()
-
-
+        movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
+        movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
     }
 
-    private fun initStorageViewModel() {
-        movieListViewModel.getLocalStorage().observe(viewLifecycleOwner) {
-
-            movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
-            movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
-
-            if (it) {
-                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-            } else {
-                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.RED)
-            }
-        }
-    }
 
     private fun initListViewModel(movieListType: MovieListType, recyclerView: RecyclerView) {
         movieListViewModel.getMovieListState(movieListType).observe(viewLifecycleOwner) {
@@ -104,7 +83,7 @@ class MainMovieListFragment : Fragment() {
         }
     }
 
-    private fun renderMovieList(movieList: List<Movie>, recyclerView: RecyclerView) {
+    private fun renderMovieList(movieList: ImdbMovieList, recyclerView: RecyclerView) {
         adapter = MovieListAdapter(object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,
