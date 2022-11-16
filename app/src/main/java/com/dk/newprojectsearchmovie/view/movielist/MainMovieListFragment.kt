@@ -1,6 +1,8 @@
 package com.dk.newprojectsearchmovie.view.movielist
 
 import android.annotation.SuppressLint
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,11 +44,32 @@ class MainMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(binding) {
+            fabToggle.setOnClickListener {
+                movieListViewModel.toggleStorage()
+            }
+        }
+
         initListViewModel(MovieListType.POPULAR, binding.rvMoviesPopular)
         initListViewModel(MovieListType.TOP250, binding.rvMoviesTop250)
 
-        movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
-        movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
+        initStorageViewModel()
+
+
+    }
+
+    private fun initStorageViewModel() {
+        movieListViewModel.getLocalStorage().observe(viewLifecycleOwner) {
+
+            movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
+            movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
+
+            if (it) {
+                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
+            } else {
+                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.RED)
+            }
+        }
     }
 
 
