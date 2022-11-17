@@ -5,13 +5,13 @@ import com.dk.newprojectsearchmovie.model.imdb.Movie
 import com.dk.newprojectsearchmovie.model.imdbMovie.ImdbMovieDetail
 import retrofit2.Callback
 
-class RemoteRepositoryImpl: Repository {
+class RemoteRepositoryImpl: Repository<Callback<ImdbMovieList>, Callback<ImdbMovieDetail>> {
 
-    override fun getMovieList(movieListType: MovieListType, callback: Any) {
-        return RequestAPI.create().getMovieList(getMovieListType(movieListType)).enqueue(callback as Callback<ImdbMovieList>)
+    override fun getMovieList(movieListType: MovieListType, callbackList: Callback<ImdbMovieList>) {
+        return RequestAPI.create().getMovieList(getMovieListType(movieListType)).enqueue(callbackList)
     }
 
-    override fun getMovieDetail(movie: Movie, callback: Any) {
-        return RequestAPI.create().getMovieDetail(movie.id.toString()).enqueue(callback as Callback<ImdbMovieDetail>)
+    override fun getMovieDetail(movie: Movie, callbackDetail: Callback<ImdbMovieDetail>) {
+        return RequestAPI.create().getMovieDetail(movie.id.toString()).enqueue(callbackDetail)
     }
 }

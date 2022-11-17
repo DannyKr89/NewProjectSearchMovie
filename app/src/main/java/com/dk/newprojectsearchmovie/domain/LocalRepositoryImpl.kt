@@ -5,28 +5,27 @@ import com.dk.newprojectsearchmovie.model.imdb.getMoviePopularListFromLocalStora
 import com.dk.newprojectsearchmovie.model.imdb.getMovieTop250ListFromLocalStorage
 import com.dk.newprojectsearchmovie.model.imdbMovie.ImdbMovieDetail
 
-class LocalRepositoryImpl : Repository {
-    override fun getMovieList(movieListType: MovieListType, callback: Any) {
-        when (movieListType) {
-            MovieListType.TOP250 -> (callback as MovieListCallback).onResponse(
-                    getMovieTop250ListFromLocalStorage()
-                )
+class LocalRepositoryImpl : Repository<MovieListCallback, MovieDetailCallback> {
 
-            MovieListType.POPULAR -> (callback as MovieListCallback).onResponse(
+    override fun getMovieList(movieListType: MovieListType, callbackList: MovieListCallback) {
+        when (movieListType) {
+            MovieListType.TOP250 -> callbackList.onResponse(getMovieTop250ListFromLocalStorage())
+
+            MovieListType.POPULAR -> callbackList.onResponse(
                 getMoviePopularListFromLocalStorage()
             )
         }
     }
 
-    override fun getMovieDetail(movie: Movie, callback: Any) {
+    override fun getMovieDetail(movie: Movie, callbackDetail: MovieDetailCallback) {
 
-        (callback as MovieDetailCallback).onResponse(
-                ImdbMovieDetail(
-                    title = movie.title,
-                    year = movie.year,
-                    imDbRating = movie.imDbRating,
-                    image = movie.image
-                )
+        callbackDetail.onResponse(
+            ImdbMovieDetail(
+                title = movie.title,
+                year = movie.year,
+                imDbRating = movie.imDbRating,
+                image = movie.image
             )
+        )
     }
 }

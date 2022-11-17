@@ -54,10 +54,10 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        holder.bind(movieList.movies!!.get(position))
+        movieList.movies?.let { holder.bind(it[position]) }
     }
 
-    override fun getItemCount(): Int = movieList.movies!!.size
+    override fun getItemCount(): Int = movieList.movies?.size ?: throw RuntimeException("movieList = null")
 
 
 }
