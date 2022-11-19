@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.domain
+package com.dk.newprojectsearchmovie.data.common
 
 enum class MovieListType() {
     TOP250, POPULAR

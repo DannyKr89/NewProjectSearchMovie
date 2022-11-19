@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.viewmodel
+package com.dk.newprojectsearchmovie.presentation.viewmodel
 
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 

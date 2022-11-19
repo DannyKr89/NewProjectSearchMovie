@@ -1,7 +1,7 @@
-package com.dk.newprojectsearchmovie.domain
+package com.dk.newprojectsearchmovie.data
 
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
-import com.dk.newprojectsearchmovie.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,7 +24,7 @@ interface RequestAPI {
     ): Call<ImdbMovieDetail>
 
     companion object {
-        fun create(): RequestAPI{
+        fun create(): RequestAPI {
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://imdb-api.com/")
                 .addConverterFactory(GsonConverterFactory.create())

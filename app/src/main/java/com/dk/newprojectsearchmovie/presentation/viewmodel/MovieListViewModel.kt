@@ -1,11 +1,15 @@
-package com.dk.newprojectsearchmovie.viewmodel
+package com.dk.newprojectsearchmovie.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dk.newprojectsearchmovie.domain.*
+import com.dk.newprojectsearchmovie.data.common.MovieDetailCallback
+import com.dk.newprojectsearchmovie.data.common.MovieListCallback
+import com.dk.newprojectsearchmovie.data.common.MovieListType
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
-import com.dk.newprojectsearchmovie.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.repository.LocalRepositoryImpl
+import com.dk.newprojectsearchmovie.data.repository.RemoteRepositoryImpl
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

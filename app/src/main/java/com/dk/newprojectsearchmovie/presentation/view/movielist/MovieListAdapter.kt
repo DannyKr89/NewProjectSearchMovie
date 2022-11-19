@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.view.movielist
+package com.dk.newprojectsearchmovie.presentation.view.movielist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

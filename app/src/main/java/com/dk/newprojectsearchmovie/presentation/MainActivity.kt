@@ -1,10 +1,11 @@
-package com.dk.newprojectsearchmovie
+package com.dk.newprojectsearchmovie.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

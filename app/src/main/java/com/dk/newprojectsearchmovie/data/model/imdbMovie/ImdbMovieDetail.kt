@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.model.imdbMovie
+package com.dk.newprojectsearchmovie.data.model.imdbMovie
 
 
 import com.google.gson.annotations.SerializedName
