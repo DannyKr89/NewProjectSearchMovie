@@ -2,12 +2,9 @@ package com.dk.newprojectsearchmovie.presentation.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dk.newprojectsearchmovie.data.common.MovieDetailCallback
 import com.dk.newprojectsearchmovie.data.common.MovieListCallback
 import com.dk.newprojectsearchmovie.data.common.MovieListType
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
-import com.dk.newprojectsearchmovie.model.imdb.Movie
-import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
 import com.dk.newprojectsearchmovie.data.repository.LocalRepositoryImpl
 import com.dk.newprojectsearchmovie.data.repository.RemoteRepositoryImpl
 import retrofit2.Call
@@ -44,7 +41,7 @@ class MovieListViewModel(
         }
     }
 
-    fun getRequestMovieListState(movieListType: MovieListType) {
+    fun getRequestMovieListState(movieListType: MovieListType, storage: Boolean?) {
         val mutableLiveData = when (movieListType) {
             MovieListType.TOP250 -> getMovieListTop250
             MovieListType.POPULAR -> getMovieListPopular
@@ -52,7 +49,7 @@ class MovieListViewModel(
         mutableLiveData.value = StateLoadMovieList.Loading
 
 
-        if (getLocalStorage().value == true) {
+        if (storage!!) {
             RemoteRepositoryImpl().getMovieList(movieListType, object : Callback<ImdbMovieList> {
                 override fun onResponse(
                     call: Call<ImdbMovieList>, response: Response<ImdbMovieList>
@@ -74,45 +71,6 @@ class MovieListViewModel(
                 override fun onResponse(imdbMovieList: ImdbMovieList) {
                     mutableLiveData.postValue(StateLoadMovieList.SuccessLoad(imdbMovieList))
                 }
-
-                override fun onFailure() {
-
-                }
-            })
-        }
-
-    }
-
-    fun getMovieDetailState(): MutableLiveData<StateLoadMovie> {
-        return getMovieDetail
-    }
-
-    fun getRequestMovieDetailState(movie: Movie) {
-
-        getMovieDetail.value = StateLoadMovie.Loading
-
-
-        if (getLocalStorage().value == true) {
-            RemoteRepositoryImpl().getMovieDetail(movie, object : Callback<ImdbMovieDetail> {
-                override fun onResponse(call: Call<ImdbMovieDetail>, response: Response<ImdbMovieDetail>) {
-                    val movieDetail = response.body()
-                    if (movieDetail != null) getMovieDetail.postValue(
-                        StateLoadMovie.SuccessLoad(movieDetail)
-                    )
-                }
-                override fun onFailure(call: Call<ImdbMovieDetail>, t: Throwable) {
-                    getMovieDetail.postValue(StateLoadMovie.ErrorLoad(ImdbMovieDetail()))
-                }
-
-            })
-        } else {
-            LocalRepositoryImpl().getMovieDetail(movie, object : MovieDetailCallback {
-                override fun onResponse(imdbMovieDetail: ImdbMovieDetail) {
-                    getMovieDetail.postValue(StateLoadMovie.SuccessLoad(imdbMovieDetail))
-                }
-                override fun onFailure() {
-                }
-
             })
         }
     }

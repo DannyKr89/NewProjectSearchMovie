@@ -14,6 +14,7 @@ import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMovieDetailBinding
 import com.dk.newprojectsearchmovie.model.imdb.Movie
 import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.presentation.viewmodel.MovieDetailViewModel
 import com.dk.newprojectsearchmovie.presentation.viewmodel.MovieListViewModel
 import com.dk.newprojectsearchmovie.presentation.viewmodel.StateLoadMovie
 import jp.wasabeef.glide.transformations.BlurTransformation
@@ -21,7 +22,8 @@ import java.text.NumberFormat
 
 class MovieDetailFragment : Fragment() {
 
-    private val movieViewModel: MovieListViewModel by activityViewModels()
+    private val movieDetailViewModel: MovieDetailViewModel by activityViewModels()
+    private val movieListViewModel: MovieListViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding: FragmentMovieDetailBinding
         get() {
@@ -37,11 +39,11 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val storage = movieListViewModel.getLocalStorage().value
         val movie = arguments?.getParcelable<Movie>(MOVIE)!!
+        movieDetailViewModel.getRequestMovieDetailState(movie,storage)
 
-        movieViewModel.getRequestMovieDetailState(movie)
-
-        movieViewModel.getMovieDetailState().observe(viewLifecycleOwner) {
+        movieDetailViewModel.getMovieDetailState().observe(viewLifecycleOwner) {
             when (it) {
                 is StateLoadMovie.ErrorLoad -> {
                     hideProgressBar()
