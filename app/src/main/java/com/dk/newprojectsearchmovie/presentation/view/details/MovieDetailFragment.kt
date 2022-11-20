@@ -39,7 +39,7 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val storage = movieListViewModel.getLocalStorage().value
+        val storage = movieListViewModel.getLocalStorage().value!!
         val movie = arguments?.getParcelable<Movie>(MOVIE)!!
         movieDetailViewModel.getRequestMovieDetailState(movie,storage)
 

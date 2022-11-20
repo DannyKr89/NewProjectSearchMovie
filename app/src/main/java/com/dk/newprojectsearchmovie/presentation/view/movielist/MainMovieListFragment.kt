@@ -61,11 +61,8 @@ class MainMovieListFragment : Fragment() {
     private fun initStorageViewModel() {
         movieListViewModel.getLocalStorage().observe(viewLifecycleOwner) {
 
-            movieListViewModel.getRequestMovieListState(MovieListType.TOP250, movieListViewModel.getLocalStorage().value)
-            movieListViewModel.getRequestMovieListState(
-                MovieListType.POPULAR,
-                movieListViewModel.getLocalStorage().value
-            )
+            movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
+            movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
 
             if (it) {
                 binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
