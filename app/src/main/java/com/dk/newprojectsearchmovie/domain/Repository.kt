@@ -1,9 +1,11 @@
 package com.dk.newprojectsearchmovie.domain
 
-import com.dk.newprojectsearchmovie.model.Movie
-import com.dk.newprojectsearchmovie.model.imdb.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.common.MovieListType
+import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
+import com.dk.newprojectsearchmovie.model.imdb.Movie
 
 interface Repository {
-    fun getMovieList(movieListType: MovieListType): List<Movie>
-    fun getMovieDetail(movie: Movie): ImdbMovieDetail
+    fun getMovieList(movieListType: MovieListType): ImdbMovieList?
+    fun getMovieDetail(movie: Movie): ImdbMovieDetail?
 }

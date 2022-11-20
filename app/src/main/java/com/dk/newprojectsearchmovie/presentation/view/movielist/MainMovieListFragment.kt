@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.view.movielist
+package com.dk.newprojectsearchmovie.presentation.view.movielist
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -14,12 +14,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
-import com.dk.newprojectsearchmovie.domain.MovieListType
-import com.dk.newprojectsearchmovie.model.Movie
-import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.MOVIE
-import com.dk.newprojectsearchmovie.view.details.MovieDetailFragment.Companion.NAME
-import com.dk.newprojectsearchmovie.viewmodel.MovieListViewModel
-import com.dk.newprojectsearchmovie.viewmodel.StateLoadMovieList
+import com.dk.newprojectsearchmovie.data.common.MovieListType
+import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
+import com.dk.newprojectsearchmovie.model.imdb.Movie
+import com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment.Companion.MOVIE
+import com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment.Companion.NAME
+import com.dk.newprojectsearchmovie.presentation.viewmodel.MovieListViewModel
+import com.dk.newprojectsearchmovie.presentation.viewmodel.StateLoadMovieList
 
 class MainMovieListFragment : Fragment() {
 
@@ -71,6 +72,7 @@ class MainMovieListFragment : Fragment() {
         }
     }
 
+
     private fun initListViewModel(movieListType: MovieListType, recyclerView: RecyclerView) {
         movieListViewModel.getMovieListState(movieListType).observe(viewLifecycleOwner) {
             when (it) {
@@ -104,7 +106,7 @@ class MainMovieListFragment : Fragment() {
         }
     }
 
-    private fun renderMovieList(movieList: List<Movie>, recyclerView: RecyclerView) {
+    private fun renderMovieList(movieList: ImdbMovieList, recyclerView: RecyclerView) {
         adapter = MovieListAdapter(object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/gray"
     android:orientation="vertical"
-    tools:context=".view.movielist.MainMovieListFragment">
+    tools:context=".presentation.view.movielist.MainMovieListFragment">
 
 
     <ProgressBar
@@ -27,6 +27,7 @@
         android:contentDescription="@string/internet"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedSV"

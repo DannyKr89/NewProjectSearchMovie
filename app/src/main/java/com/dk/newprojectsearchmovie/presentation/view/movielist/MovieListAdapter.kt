@@ -1,4 +1,4 @@
-package com.dk.newprojectsearchmovie.view.movielist
+package com.dk.newprojectsearchmovie.presentation.view.movielist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,21 +7,22 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
-import com.dk.newprojectsearchmovie.model.Movie
+import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
+import com.dk.newprojectsearchmovie.model.imdb.Movie
 import kotlinx.android.synthetic.main.item_movie_list.view.*
 
 class MovieListAdapter(
     var listener: MainMovieListFragment.SetOnMovieClickListener?
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
-    private var movieList = listOf<Movie>()
+    private var movieList = ImdbMovieList(listOf())
 
     fun removeListener() {
         listener = null
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setMovieList(list: List<Movie>){
+    fun setMovieList(list: ImdbMovieList){
         movieList = list
         notifyDataSetChanged()
     }
@@ -33,12 +34,12 @@ class MovieListAdapter(
         fun bind(movie: Movie) {
             with(binding) {
 
-                Glide.with(binding.root.poster).load(movie.poster).error(movie.posterLocal)
+                Glide.with(binding.root.poster).load(movie.image)
                     .into(poster)
 
                 titleMovie.text = movie.title
                 yearMovie.text = movie.year
-                ratingMovie.text = movie.rating
+                ratingMovie.text = movie.imDbRating
                 movieCard.setOnClickListener {
                     listener?.onMovieClick(movie)
                 }
@@ -53,10 +54,10 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        holder.bind(movieList[position])
+        movieList.movies?.let { holder.bind(it[position]) }
     }
 
-    override fun getItemCount(): Int = movieList.size
+    override fun getItemCount(): Int = movieList.movies?.size ?: throw RuntimeException("movieList = null")
 
 
 }
