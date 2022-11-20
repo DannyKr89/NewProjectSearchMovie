@@ -14,7 +14,6 @@ import retrofit2.Response
 class MovieListViewModel(
     private var getMovieListTop250: MutableLiveData<StateLoadMovieList> = MutableLiveData(),
     private var getMovieListPopular: MutableLiveData<StateLoadMovieList> = MutableLiveData(),
-    private var getMovieDetail: MutableLiveData<StateLoadMovie> = MutableLiveData(),
     private var isRemoteStorage: MutableLiveData<Boolean> = MutableLiveData(),
 
     ) : ViewModel() {
@@ -29,8 +28,8 @@ class MovieListViewModel(
     }
 
     fun toggleStorage() {
-        val toggleStorage = getLocalStorage().value
-        isRemoteStorage.value = !toggleStorage!!
+        val toggleStorage = getLocalStorage().value!!
+        isRemoteStorage.value = !toggleStorage
     }
 
 

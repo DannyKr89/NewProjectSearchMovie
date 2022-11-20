@@ -13,12 +13,12 @@ private const val API_KEY2 = "k_wj3nygya"
 
 interface RequestAPI {
 
-    @GET("ru/API/{movieList}/$API_KEY")
+    @GET("ru/API/{movieList}/$API_KEY2")
     fun getMovieList(
         @Path("movieList")movieList: String
     ) : Call<ImdbMovieList>
 
-    @GET("ru/API/Title/$API_KEY/{movieID}")
+    @GET("ru/API/Title/$API_KEY2/{movieID}")
     fun getMovieDetail(
         @Path("movieID") movieID: String
     ): Call<ImdbMovieDetail>

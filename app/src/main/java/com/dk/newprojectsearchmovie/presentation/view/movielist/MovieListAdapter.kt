@@ -9,7 +9,6 @@ import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
-import kotlinx.android.synthetic.main.item_movie_list.view.*
 
 class MovieListAdapter(
     var listener: MainMovieListFragment.SetOnMovieClickListener?
@@ -34,7 +33,7 @@ class MovieListAdapter(
         fun bind(movie: Movie) {
             with(binding) {
 
-                Glide.with(binding.root.poster).load(movie.image)
+                Glide.with(this.root).load(movie.image)
                     .into(poster)
 
                 titleMovie.text = movie.title
