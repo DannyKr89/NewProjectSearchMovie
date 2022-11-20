@@ -13,8 +13,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dk.newprojectsearchmovie.R
-import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
 import com.dk.newprojectsearchmovie.data.common.MovieListType
+import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
 import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
 import com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment.Companion.MOVIE
@@ -44,37 +44,12 @@ class MainMovieListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
-            fabToggle.setOnClickListener {
-                movieListViewModel.toggleStorage()
-            }
-        }
-
         initListViewModel(MovieListType.POPULAR, binding.rvMoviesPopular)
         initListViewModel(MovieListType.TOP250, binding.rvMoviesTop250)
 
-        initStorageViewModel()
-
-
+        movieListViewModel.getRequestMovieListState(MovieListType.TOP250)
+        movieListViewModel.getRequestMovieListState(MovieListType.POPULAR)
     }
-
-    private fun initStorageViewModel() {
-        movieListViewModel.getLocalStorage().observe(viewLifecycleOwner) {
-
-            movieListViewModel.getRequestMovieListState(MovieListType.TOP250, movieListViewModel.getLocalStorage().value)
-            movieListViewModel.getRequestMovieListState(
-                MovieListType.POPULAR,
-                movieListViewModel.getLocalStorage().value
-            )
-
-            if (it) {
-                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.GREEN)
-            } else {
-                binding.fabToggle.backgroundTintList = ColorStateList.valueOf(Color.RED)
-            }
-        }
-    }
-
 
     private fun initListViewModel(movieListType: MovieListType, recyclerView: RecyclerView) {
         movieListViewModel.getMovieListState(movieListType).observe(viewLifecycleOwner) {
@@ -112,7 +87,8 @@ class MainMovieListFragment : Fragment() {
     private fun renderMovieList(movieList: ImdbMovieList, recyclerView: RecyclerView) {
         adapter = MovieListAdapter(object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
-                findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,
+                findNavController().navigate(
+                    R.id.action_mainMuvieListFragment_to_movieDetailFragment,
                     Bundle().apply {
                         putParcelable(MOVIE, movie)
                         putString(NAME, movie.title)

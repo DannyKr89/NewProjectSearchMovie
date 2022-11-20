@@ -23,7 +23,6 @@ import java.text.NumberFormat
 class MovieDetailFragment : Fragment() {
 
     private val movieDetailViewModel: MovieDetailViewModel by activityViewModels()
-    private val movieListViewModel: MovieListViewModel by activityViewModels()
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding: FragmentMovieDetailBinding
         get() {
@@ -39,9 +38,8 @@ class MovieDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val storage = movieListViewModel.getLocalStorage().value
         val movie = arguments?.getParcelable<Movie>(MOVIE)!!
-        movieDetailViewModel.getRequestMovieDetailState(movie,storage)
+        movieDetailViewModel.getRequestMovieDetailState(movie)
 
         movieDetailViewModel.getMovieDetailState().observe(viewLifecycleOwner) {
             when (it) {
@@ -93,11 +91,7 @@ class MovieDetailFragment : Fragment() {
             movieRealise.text = movieDetail.year
 
             movieRating.apply {
-                text = if (movieDetail.imDbRating != null) {
-                    movieDetail.imDbRating
-                } else {
-                    ""
-                }
+                text = movieDetail.imDbRating ?: ""
                 movieDetail.imDbRating?.let {
                     when (it.toDouble()) {
                         in 0.0..4.9 -> setTextColor(Color.RED)

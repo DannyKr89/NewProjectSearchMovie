@@ -1,9 +1,12 @@
 package com.dk.newprojectsearchmovie.domain
 
 import com.dk.newprojectsearchmovie.data.common.MovieListType
+import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
+import retrofit2.Callback
 
-interface Repository<T,E> {
-    fun getMovieList(movieListType: MovieListType, callbackList: T)
-    fun getMovieDetail(movie: Movie, callbackDetail: E)
+interface Repository {
+    fun getMovieList(movieListType: MovieListType, callback: Callback<ImdbMovieList>)
+    fun getMovieDetail(movie: Movie, callback: Callback<ImdbMovieDetail>)
 }
