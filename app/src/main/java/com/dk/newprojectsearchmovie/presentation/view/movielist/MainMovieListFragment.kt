@@ -78,15 +78,14 @@ class MainMovieListFragment : Fragment() {
             when (it) {
                 is StateLoadMovieList.ErrorLoad -> {
                     hideProgressBar()
-                    Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-                    renderMovieList(it.movieList, recyclerView)
+                    Toast.makeText(requireContext(), it.throwable.message, Toast.LENGTH_SHORT).show()
                 }
                 is StateLoadMovieList.Loading -> {
                     showProgressBar()
                 }
                 is StateLoadMovieList.SuccessLoad -> {
                     hideProgressBar()
-                    renderMovieList(it.movieList, recyclerView)
+                    renderMovieList(it.movieList as ImdbMovieList, recyclerView)
                 }
             }
         }
@@ -95,14 +94,14 @@ class MainMovieListFragment : Fragment() {
     private fun hideProgressBar() {
         with(binding) {
             nestedSV.visibility = View.VISIBLE
-            progressBar.visibility = View.GONE
+            progressBarLayout.progressBar.visibility = View.GONE
         }
     }
 
     private fun showProgressBar() {
         with(binding) {
             nestedSV.visibility = View.GONE
-            progressBar.visibility = View.VISIBLE
+            progressBarLayout.progressBar.visibility = View.VISIBLE
         }
     }
 

@@ -9,9 +9,8 @@ class MovieDetailViewModel(
     private var getMovieDetail: MutableLiveData<StateLoadMovie> = MutableLiveData()
 ): ViewModel() {
 
-    fun getMovieDetailState(): MutableLiveData<StateLoadMovie> {
-        return getMovieDetail
-    }
+    fun getMovieDetailState() = getMovieDetail
+    
 
     fun getRequestMovieDetailState(movie: Movie, storage: Boolean) {
         getMovieDetail.value = StateLoadMovie.Loading

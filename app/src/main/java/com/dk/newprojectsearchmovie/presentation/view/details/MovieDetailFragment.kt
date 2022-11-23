@@ -66,14 +66,14 @@ class MovieDetailFragment : Fragment() {
 
     private fun hideProgressBar() {
         with(binding) {
-            progressBarDetail.visibility = View.GONE
+            progressBarLayout.progressBar.visibility = View.GONE
             nestedSVDetail.visibility = View.VISIBLE
         }
     }
 
     private fun showProgressBar() {
         with(binding) {
-            progressBarDetail.visibility = View.VISIBLE
+            progressBarLayout.progressBar.visibility = View.VISIBLE
             nestedSVDetail.visibility = View.GONE
         }
     }

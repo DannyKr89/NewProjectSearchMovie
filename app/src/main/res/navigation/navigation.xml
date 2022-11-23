@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/mainMovieListFragment">
+    app:startDestination="@id/searchFragment">
 
     <fragment
-        android:id="@+id/mainMovieListFragment"
+        android:id="@+id/TopMovieListFragment"
         android:name="com.dk.newprojectsearchmovie.presentation.view.movielist.MainMovieListFragment"
-        android:label="@string/app_name"
+        android:label="@string/top_movies"
         tools:layout="@layout/fragment_main_movie_list" >
         <action
             android:id="@+id/action_mainMuvieListFragment_to_movieDetailFragment"
@@ -18,7 +18,7 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/mainMovieListFragment"
+            app:popUpTo="@id/TopMovieListFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
@@ -26,4 +26,9 @@
         android:name="com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_movie_detail" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.dk.newprojectsearchmovie.presentation.view.search.SearchFragment"
+        android:label="Поиск"
+        tools:layout="@layout/fragment_search" />
 </navigation>

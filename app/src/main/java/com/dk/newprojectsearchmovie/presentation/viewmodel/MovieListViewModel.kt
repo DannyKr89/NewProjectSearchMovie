@@ -15,9 +15,8 @@ class MovieListViewModel(
         isRemoteStorage.value = false
     }
 
-    fun getLocalStorage(): MutableLiveData<Boolean> {
-        return isRemoteStorage
-    }
+    fun getLocalStorage() = isRemoteStorage
+
 
     fun toggleStorage() {
         val toggleStorage = getLocalStorage().value

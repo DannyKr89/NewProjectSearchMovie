@@ -9,4 +9,9 @@
     <string name="directors">Режиссеры:</string>
     <string name="actors">Актеры:</string>
     <string name="similars">Похожие фильмы:</string>
+    <string name="search">Поиск</string>
+    <string name="top">Топ</string>
+    <string name="top_movies">Топ Фильмы</string>
+    <string name="min_rating">Минимальный рэйтинг</string>
+    <string name="input_title">Введите название</string>
 </resources>

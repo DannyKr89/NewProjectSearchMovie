@@ -7,6 +7,11 @@
     android:background="@color/black"
     tools:context=".presentation.view.details.MovieDetailFragment">
 
+    <include
+        android:id="@+id/progressBarLayout"
+        layout="@layout/progress_bar"
+        />
+
     <ImageView
         android:id="@+id/background"
         android:layout_width="match_parent"
@@ -18,15 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ProgressBar
-        android:id="@+id/progressBarDetail"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedSVDetail"

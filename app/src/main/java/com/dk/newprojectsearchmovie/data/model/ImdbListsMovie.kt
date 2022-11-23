@@ -5,7 +5,7 @@ import android.net.Uri
 import android.os.Parcelable
 import com.dk.newprojectsearchmovie.R
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ImdbMovieList(
@@ -19,11 +19,16 @@ data class Movie(
     val id: String?,
     @SerializedName("imDbRating")
     val imDbRating: String?,
-    @SerializedName("imDbRatingCount") val imDbRatingCount: String?,
-    @SerializedName("image") val image: String?,
-    @SerializedName("rank") val rank: String?,
-    @SerializedName("title") val title: String?,
-    @SerializedName("year") val year: String?
+    @SerializedName("imDbRatingCount")
+    val imDbRatingCount: String?,
+    @SerializedName("image")
+    val image: String?,
+    @SerializedName("rank")
+    val rank: String?,
+    @SerializedName("title")
+    val title: String?,
+    @SerializedName("year")
+    val year: String?
 ) : Parcelable
 
 
