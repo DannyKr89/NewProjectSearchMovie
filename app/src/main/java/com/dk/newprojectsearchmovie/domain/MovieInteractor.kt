@@ -1,33 +1,22 @@
 package com.dk.newprojectsearchmovie.domain
 
-import com.dk.newprojectsearchmovie.data.common.MovieListType
-import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.model.detailMovie.ImdbMovieDetail
 import com.dk.newprojectsearchmovie.data.model.search.RequestSearchMovie
-import com.dk.newprojectsearchmovie.data.repository.LocalRepositoryImpl
 import com.dk.newprojectsearchmovie.data.repository.RemoteRepositoryImpl
-import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
-import com.dk.newprojectsearchmovie.model.imdb.Movie
+import com.dk.newprojectsearchmovie.model.imdb.CollectionsMovieList
 import retrofit2.Callback
 
-class MovieInteractor(private val storage: Boolean) {
+class MovieInteractor() {
 
-    fun getList(movieListType: MovieListType): ImdbMovieList? {
-        return if (storage) {
-            RemoteRepositoryImpl().getMovieList(movieListType)
-        } else {
-            LocalRepositoryImpl().getMovieList(movieListType)
-        }
+    fun getList(movieListType: String, callback: Callback<CollectionsMovieList>) {
+        return RemoteRepositoryImpl().getMovieList(movieListType, callback)
     }
 
-    fun getDetail(movie: Movie): ImdbMovieDetail? {
-        return if (storage) {
-            RemoteRepositoryImpl().getMovieDetail(movie)
-        } else {
-            LocalRepositoryImpl().getMovieDetail(movie)
-        }
+    fun getDetail(movieID: String, callback: Callback<ImdbMovieDetail>) {
+        return RemoteRepositoryImpl().getMovieDetail(movieID, callback)
     }
 
-    fun getSearchList(titleQuery: String, minRating: String, callback: Callback<RequestSearchMovie>) {
-        return RemoteRepositoryImpl().getMovieSearchList(titleQuery,minRating, callback)
+    fun getSearchList(titleQuery: String, callback: Callback<RequestSearchMovie>) {
+        return RemoteRepositoryImpl().getMovieSearchList(titleQuery, callback)
     }
 }

@@ -1,25 +1,19 @@
 package com.dk.newprojectsearchmovie.presentation.view.search
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.data.model.search.SearchMovie
 import com.dk.newprojectsearchmovie.databinding.ItemSearchMovieBinding
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+class SearchAdapter : ListAdapter<SearchMovie, SearchAdapter.SearchViewHolder>(
+    SearchMovieListCallback()
+) {
 
-    private var searchList = listOf<SearchMovie>()
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<SearchMovie>) {
-        searchList = list
-        notifyDataSetChanged()
-    }
-
+    var listener: ((SearchMovie) -> Unit)? = null
 
     inner class SearchViewHolder(private val binding: ItemSearchMovieBinding) : ViewHolder(binding.root) {
         fun bind(searchMovie: SearchMovie) {
@@ -42,6 +36,9 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
                         }
                     }
                 }
+                item.setOnClickListener {
+                    listener?.invoke(searchMovie)
+                }
             }
         }
     }
@@ -52,8 +49,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(searchList[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount() = searchList.size
 }

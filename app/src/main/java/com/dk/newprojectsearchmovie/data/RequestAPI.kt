@@ -1,7 +1,8 @@
 package com.dk.newprojectsearchmovie.data
 
-import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
-import com.dk.newprojectsearchmovie.data.model.imdbMovie.ImdbMovieDetail
+import com.dk.newprojectsearchmovie.data.common.API_KEY
+import com.dk.newprojectsearchmovie.model.imdb.CollectionsMovieList
+import com.dk.newprojectsearchmovie.data.model.detailMovie.ImdbMovieDetail
 import com.dk.newprojectsearchmovie.data.model.search.RequestSearchMovie
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -10,12 +11,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val API_KEY = "k_u5wvreo1"
-private const val API_KEY2 = "k_wj3nygya"
+
 
 interface RequestAPI {
 
-    @GET("ru/API/AdvancedSearch/$API_KEY2/")
+    @GET("ru/API/AdvancedSearch/$API_KEY/")
     fun getSearchMovieList(
         @Query("title") titleQuery: String,
         @Query("title_type") titleType: String = "feature",
@@ -25,7 +25,7 @@ interface RequestAPI {
     @GET("ru/API/{movieList}/$API_KEY")
     fun getMovieList(
         @Path("movieList")movieList: String
-    ) : Call<ImdbMovieList>
+    ) : Call<CollectionsMovieList>
 
     @GET("ru/API/Title/$API_KEY/{movieID}")
     fun getMovieDetail(

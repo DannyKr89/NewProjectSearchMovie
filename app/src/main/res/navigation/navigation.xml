@@ -3,32 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/MainFragment">
 
     <fragment
-        android:id="@+id/TopMovieListFragment"
-        android:name="com.dk.newprojectsearchmovie.presentation.view.movielist.MainMovieListFragment"
-        android:label="@string/top_movies"
-        tools:layout="@layout/fragment_main_movie_list" >
+        android:id="@+id/FavoriteFragment"
+        android:name="com.dk.newprojectsearchmovie.presentation.view.favoritelist.FavoriteListFragment"
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite" >
         <action
-            android:id="@+id/action_mainMuvieListFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment"
+            android:id="@+id/Favorite_to_Detail"
+            app:destination="@id/MovieDetailFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:launchSingleTop="true"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/TopMovieListFragment"
+            app:popUpTo="@id/FavoriteFragment"
             app:popUpToInclusive="false" />
     </fragment>
     <fragment
-        android:id="@+id/movieDetailFragment"
+        android:id="@+id/MovieDetailFragment"
         android:name="com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment"
         android:label="{name}"
         tools:layout="@layout/fragment_movie_detail" />
     <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.dk.newprojectsearchmovie.presentation.view.search.SearchFragment"
+        android:id="@+id/MainFragment"
+        android:name="com.dk.newprojectsearchmovie.presentation.view.main.MainFragment"
         android:label="Поиск"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/Main_to_SearchList"
+            app:destination="@id/SearchListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/MainFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/Main_to_Collections"
+            app:destination="@id/CollectionsListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/MainFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/SearchListFragment"
+        android:name="com.dk.newprojectsearchmovie.presentation.view.search.SearchFragment"
+        android:label="Поиск: {text Query}"
+        tools:layout="@layout/fragment_search_list" >
+        <action
+            android:id="@+id/SearchList_to_Detail"
+            app:destination="@id/MovieDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/SearchListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/CollectionsListFragment"
+        android:name="com.dk.newprojectsearchmovie.presentation.view.collections.CollectionsListFragment"
+        android:label="{name}"
+        tools:layout="@layout/fragment_collections_list" >
+        <action
+            android:id="@+id/Collections_to_Detail"
+            app:destination="@id/MovieDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/CollectionsListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
 </navigation>

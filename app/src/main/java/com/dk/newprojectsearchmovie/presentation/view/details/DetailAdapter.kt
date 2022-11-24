@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.databinding.ItemDetailsListBinding
-import com.dk.newprojectsearchmovie.data.model.imdbMovie.Actor
-import com.dk.newprojectsearchmovie.data.model.imdbMovie.Similar
+import com.dk.newprojectsearchmovie.data.model.detailMovie.Actor
+import com.dk.newprojectsearchmovie.data.model.detailMovie.Similar
 import com.dk.newprojectsearchmovie.presentation.view.details.DetailAdapter.DetailViewHolder
 
 class DetailAdapter(private val list: List<Any>) : RecyclerView.Adapter<DetailViewHolder>() {
