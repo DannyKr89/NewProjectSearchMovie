@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dk.newprojectsearchmovie.R
 import com.dk.newprojectsearchmovie.databinding.FragmentMainMovieListBinding
 import com.dk.newprojectsearchmovie.data.common.MovieListType
-import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
 import com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment.Companion.MOVIE
 import com.dk.newprojectsearchmovie.presentation.view.details.MovieDetailFragment.Companion.NAME
@@ -85,7 +84,8 @@ class MainMovieListFragment : Fragment() {
                 }
                 is StateLoadMovieList.SuccessLoad -> {
                     hideProgressBar()
-                    renderMovieList(it.movieList as ImdbMovieList, recyclerView)
+                    @Suppress("UNCHECKED_CAST")
+                    renderMovieList(it.movieList as List<Movie>, recyclerView)
                 }
             }
         }
@@ -105,7 +105,7 @@ class MainMovieListFragment : Fragment() {
         }
     }
 
-    private fun renderMovieList(movieList: ImdbMovieList, recyclerView: RecyclerView) {
+    private fun renderMovieList(movieList: List<Movie>, recyclerView: RecyclerView) {
         adapter = MovieListAdapter(object : SetOnMovieClickListener {
             override fun onMovieClick(movie: Movie) {
                 findNavController().navigate(R.id.action_mainMuvieListFragment_to_movieDetailFragment,

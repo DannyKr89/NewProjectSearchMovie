@@ -11,8 +11,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.dk.newprojectsearchmovie.R
-import com.dk.newprojectsearchmovie.data.model.search.RequestSearchMovie
+import com.dk.newprojectsearchmovie.data.model.search.SearchMovie
 import com.dk.newprojectsearchmovie.databinding.FragmentSearchBinding
 import com.dk.newprojectsearchmovie.presentation.viewmodel.MovieSearchListViewModel
 import com.dk.newprojectsearchmovie.presentation.viewmodel.StateLoadMovieList
@@ -26,6 +25,7 @@ class SearchFragment : Fragment() {
     private var adapter: SearchAdapter? = null
     private lateinit var sharedPref: SharedPreferences
     private var seekBarRating by Delegates.notNull<Int>()
+    private var movieList = listOf<SearchMovie>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +61,11 @@ class SearchFragment : Fragment() {
                 }
                 is StateLoadMovieList.SuccessLoad -> {
                     hideProgressBar()
-                    renderMovieList(it.movieList as RequestSearchMovie)
+                    @Suppress("UNCHECKED_CAST")
+                    movieList =
+                        (it.movieList as List<SearchMovie>).sortedBy { list -> list.imDbRating }
+
+                    renderMovieList(movieList.reversed())
                 }
             }
         }
@@ -89,6 +93,12 @@ class SearchFragment : Fragment() {
                 override fun onStopTrackingTouch(p0: SeekBar?) {
                     if (p0 != null) {
                         viewModel.setMinRating(getDoubleFromString(p0.progress))
+                        val newList = movieList.filter {
+                            it.imDbRating >= getDoubleFromString(p0.progress).toString()
+                        }.sortedBy {
+                            it.imDbRating
+                        }.reversed()
+                        renderMovieList(newList)
                     }
                     sharedPref.edit().putInt("seekbar", seekBar.progress).apply()
                 }
@@ -101,13 +111,10 @@ class SearchFragment : Fragment() {
         return seekBarRating.toDouble()/10
     }
 
-    private fun renderMovieList(requestSearchMovie: RequestSearchMovie) {
+    private fun renderMovieList(movieList: List<SearchMovie>) {
 
-        val searchList = requestSearchMovie.searchMovie.sortedBy {
-            it.imDbRating
-        }
+        adapter?.setList(movieList)
         with(binding) {
-            adapter?.setList(searchList.reversed())
             rvSearch.adapter = adapter
         }
     }

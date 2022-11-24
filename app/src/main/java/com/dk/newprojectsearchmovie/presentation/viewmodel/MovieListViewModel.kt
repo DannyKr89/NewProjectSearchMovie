@@ -38,7 +38,7 @@ class MovieListViewModel(
         mutableLiveData.value = StateLoadMovieList.Loading
         Thread {
             val movieList = MovieInteractor(getLocalStorage().value!!).getList(movieListType)
-            mutableLiveData.postValue(movieList?.let { StateLoadMovieList.SuccessLoad(it) })
+            mutableLiveData.postValue(movieList?.let { StateLoadMovieList.SuccessLoad(it.movies!!) })
         }.start()
     }
 }

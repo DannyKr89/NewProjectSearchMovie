@@ -7,21 +7,20 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.dk.newprojectsearchmovie.databinding.ItemMovieListBinding
-import com.dk.newprojectsearchmovie.model.imdb.ImdbMovieList
 import com.dk.newprojectsearchmovie.model.imdb.Movie
 
 class MovieListAdapter(
     var listener: MainMovieListFragment.SetOnMovieClickListener?
 ) : RecyclerView.Adapter<MovieListAdapter.MovieListViewHolder>() {
 
-    private var movieList = ImdbMovieList(listOf())
+    private var movieList = listOf<Movie>()
 
     fun removeListener() {
         listener = null
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setMovieList(list: ImdbMovieList){
+    fun setMovieList(list: List<Movie>){
         movieList = list
         notifyDataSetChanged()
     }
@@ -53,10 +52,10 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        movieList.movies?.let { holder.bind(it[position]) }
+        holder.bind(movieList[position])
     }
 
-    override fun getItemCount(): Int = movieList.movies?.size ?: throw RuntimeException("movieList = null")
+    override fun getItemCount(): Int = movieList.size
 
 
 }

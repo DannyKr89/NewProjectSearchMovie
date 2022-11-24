@@ -33,7 +33,7 @@ class MovieSearchListViewModel(
             ) {
                 val searchList = response.body()
                 if (response.isSuccessful){
-                    getMovieSearchList().postValue(searchList?.let { StateLoadMovieList.SuccessLoad(it) })
+                    getMovieSearchList().postValue(searchList?.let { StateLoadMovieList.SuccessLoad(it.searchMovie) })
                 }
             }
 
